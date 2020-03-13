@@ -4,7 +4,7 @@ Some notes and code from [this](https://www.youtube.com/playlist?list=PL-osiE80T
 
 ## Data
 
-Data came from Stack Overflow 2019 survey
+Data came from Stack Overflow 2019 survey. Download them and put them do data folder, so notebooks can function properly.
 
 # 1 Installation
 
