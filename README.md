@@ -6,6 +6,8 @@ Some notes and code from [this](https://www.youtube.com/playlist?list=PL-osiE80T
 
 Data came from Stack Overflow 2019 survey. Download them and put them do data folder, so notebooks can function properly.
 
+Data for tutorial 10 came from Corey's (tutorial author) github repo. They are Etherium cryptocurrency historical data.
+
 # 1 Installation
 
 - data analysis library (csv, excel)
@@ -165,3 +167,30 @@ Data came from Stack Overflow 2019 survey. Download them and put them do data fo
   - on nan values need to use float type
   - `df['age] = df['age'].astype(int)` - cast to integer, cant have nan values
 - .unique - returns unique values of column - so we can see which vlaues it has, if we can convert or run computations
+
+# 10 Date time data
+
+- need to convert str data to datetime
+  - per column
+  - to_datetime()
+  - `df['Date'] = pd.to_datetime(df['Date'], format='xxx')`
+  - unknown string format - doesn't know how to parse that string
+  - find the codes in python documentation
+  - example `%Y-%m-%d %I-%p`
+  - can also convert to date while loading csv
+  - use parse_dates keyword argument, after that lambda function to convert str to date, keyword argument date_parser
+  - for converting str to date use pd.datetime.strptime(str, format)
+- datetime methods
+  - day_name
+  - on whole series, use dt before funciton
+  - filtering
+    - use filters
+    - or create index from datetime and use slicing, second value inclusive df['lal':'lol']
+  - resamppling
+    - changing sample size (hours, minitues, days ...)
+    - sampling codes
+    - `df['High'].resample('D').max()`
+    - funciton at the end, which value wwe want to save to resampled series
+    - multipe resamples, like max from this oclumn, mean from that ...
+    - `df.resample('W').mena()` - everything mean
+    - `df.resample('W').agg({'Close':'mean','High':'max','Low':'min','Volume':'sum'})` - different funciton for different columns
