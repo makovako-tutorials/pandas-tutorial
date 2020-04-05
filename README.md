@@ -194,3 +194,44 @@ Data for tutorial 10 came from Corey's (tutorial author) github repo. They are E
     - multipe resamples, like max from this oclumn, mean from that ...
     - `df.resample('W').mena()` - everything mean
     - `df.resample('W').agg({'Close':'mean','High':'max','Low':'min','Volume':'sum'})` - different funciton for different columns
+
+# 11 read write different formats json, excel
+
+- read_csv
+- to_csv
+- tsv - tab separated value, as a paramter to read/to_csv
+  - `india_df.to_csv('data/modified.tsv', sep='\t')`
+- excel
+  - pakcages
+    - xlwt - older xls
+    - openpyexel - newer xlsx
+    - xlrd - read excel
+  - can write to speicfied sheet, sheet argument to method
+- json
+  - by default dictionary like
+  - orient=records - list like
+  - lines=True - each on new line, easier to read
+- databases
+  - SQLAlchemy - to work with databases
+  - psycopg2-binary - to work with postgres
+```py
+from sqlalchemy import create_engine
+import psycopg2
+
+engine = create_engine('postgresql://<username>:<password>@localhost:5432/<dbname>') # error if table already exists
+
+india_df.to_sql('sample_table', engine)
+
+# if want to reqrite data
+
+india_df.to_sql('sample_table', engine, if_exists='replace')
+
+# other options - append, ...
+
+ sql_df = pd.read_sql('table_name', engine, index_col='Respondent')
+
+ sql_df = pd.read_sql_query('SELECT * FROM table_name', engine, index_col='Respondent')
+```
+
+- loading from url - possible, just use correct method
+ 
